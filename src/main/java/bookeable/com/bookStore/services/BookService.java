@@ -27,17 +27,23 @@ public class BookService {
         return bookToBeReturned;
     }
 
-    public List<Book> listAll(){
+    public List<BookResponseDTO> listAll(){
 
         List<Book> allBooks =  bookRepository.findAll();
 
 
-        return allBooks;
+        return allBooks.stream().map(this::toDto).toList();
 
     }
 
+    /*
+    public Book  findById(Long id){
+        return bookRepository.findById(id);
+    }  */
+
 
     public List<Book> findByAuthor(String authorName) {
+
         return  bookRepository.findByAuthorContainingIgnoreCase(authorName);
     }
 
