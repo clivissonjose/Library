@@ -1,9 +1,11 @@
 package bookeable.com.bookStore.services;
 
+import bookeable.com.bookStore.dtos.UpdatePasswordDTO;
 import bookeable.com.bookStore.dtos.UpdateUserNameDTO;
 import bookeable.com.bookStore.models.User;
 import bookeable.com.bookStore.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +32,6 @@ public class UserService {
            if(userOptional.isPresent()){
 
                User user = userOptional.get();
-               String name = user.getName();
-               System.out.println("Name: "+ name);
                user.setName(userName.getName());
                userRepository.save(user);
 
@@ -40,6 +40,21 @@ public class UserService {
            }
 
          // throw new EntityNotFoundException("Usuário não encontrado com ID: " + id);
+    }
+
+    public void updatePassword(UpdatePasswordDTO dto, Long id){
+
+        Optional<User> optionalUser = userRepository.findById(id);
+
+        if(optionalUser.isEmpty()){
+            throw new EntityNotFoundException("Usuário não encontrado com ID: " + id);
+        }
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(dto.getPassword());
+        User user = optionalUser.get();
+        user.setPassword(encryptedPassword);
+        userRepository.save(user);
+
     }
 
     public void deleteUser(Long id){

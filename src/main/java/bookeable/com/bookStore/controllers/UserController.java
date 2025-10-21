@@ -1,5 +1,6 @@
 package bookeable.com.bookStore.controllers;
 
+import bookeable.com.bookStore.dtos.UpdatePasswordDTO;
 import bookeable.com.bookStore.dtos.UpdateUserNameDTO;
 import bookeable.com.bookStore.models.User;
 import bookeable.com.bookStore.repositories.UserRepository;
@@ -27,14 +28,19 @@ public class UserController {
        return ResponseEntity.ok(allUsers);
     }
 
-
-
-
     @PatchMapping("/{id}")
     public ResponseEntity  updateUserName(@RequestBody UpdateUserNameDTO userName, @PathVariable Long id ){
           userService.updateUserName(userName, id);
 
           return ResponseEntity.ok("Nome Atualizado!");
+    }
+
+    @PatchMapping("/password/{id}")
+    public ResponseEntity updatePassword(@RequestBody UpdatePasswordDTO dto, @PathVariable Long id){
+
+        userService.updatePassword(dto, id);
+
+        return ResponseEntity.ok("Senha Atualizada!");
     }
 
 
