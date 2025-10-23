@@ -57,6 +57,16 @@ public class BookService {
 
     }
 
+    public List<BookResponseDTO> getBooksUpToPrice(float price){
+
+        List<Book> booksLessPrice = bookRepository.findByPriceLessThanEqual(price);
+
+        List<BookResponseDTO> booksToBeReturned =  booksLessPrice.stream().map(this::toDto).toList();
+
+        return booksToBeReturned;
+
+    }
+
     private  Book returnEntity(BookRequestDTO dto){
         Book book = new Book();
 

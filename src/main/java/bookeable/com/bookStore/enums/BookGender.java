@@ -6,5 +6,13 @@ public enum BookGender {
     HORROR,
     ACTION,
     ROMANCE,
+    HUMOR,
+    SCIENCE_FICTION,
+    BIOGRAPHY,
+    SELF_HELP,
+    HISTORY,
+    POETRY,
+    MYSTERY,
+    FANTASY,
 
 }

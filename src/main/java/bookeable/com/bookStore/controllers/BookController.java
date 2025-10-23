@@ -46,6 +46,16 @@ public class BookController {
         return ResponseEntity.ok(booksByAuthor);
     }
 
+    @GetMapping("/price")
+    public ResponseEntity<List<BookResponseDTO>> booksByPrice(@RequestParam("price") float price){
+
+        List<BookResponseDTO> allBooksLessThanPrice = bookService.getBooksUpToPrice(price);
+        return ResponseEntity.ok(allBooksLessThanPrice);
+
+    }
+
+
+
     @DeleteMapping("/delete/{id}")
     public  ResponseEntity<String> delete(@PathVariable Long id ){
         try {
