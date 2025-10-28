@@ -14,5 +14,7 @@ public enum BookGender {
     POETRY,
     MYSTERY,
     FANTASY,
+    TECHNOLOGY,
+    PSYCHOLOGY,
 
 }

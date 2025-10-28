@@ -2,6 +2,7 @@ package bookeable.com.bookStore.services;
 
 import bookeable.com.bookStore.dtos.BookRequestDTO;
 import bookeable.com.bookStore.dtos.BookResponseDTO;
+import bookeable.com.bookStore.enums.BookGender;
 import bookeable.com.bookStore.models.Book;
 import bookeable.com.bookStore.repositories.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -57,13 +58,20 @@ public class BookService {
 
     }
 
-    public List<BookResponseDTO> getBooksUpToPrice(float price){
+    public List<BookResponseDTO> getBooksUpToPrice(double price){
 
         List<Book> booksLessPrice = bookRepository.findByPriceLessThanEqual(price);
 
         List<BookResponseDTO> booksToBeReturned =  booksLessPrice.stream().map(this::toDto).toList();
 
         return booksToBeReturned;
+
+    }
+
+    public List<BookResponseDTO> getBooksUpToPriceAuthorAndGender(double price, BookGender gender, String author){
+
+       List<Book> books =  bookRepository.findByPriceLessThanEqualAndAuthorContainingIgnoreCaseAndGender(price, author, gender);
+       return  books.stream().map(this::toDto).toList();
 
     }
 

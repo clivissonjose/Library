@@ -2,6 +2,7 @@ package bookeable.com.bookStore.controllers;
 
 import bookeable.com.bookStore.dtos.BookRequestDTO;
 import bookeable.com.bookStore.dtos.BookResponseDTO;
+import bookeable.com.bookStore.enums.BookGender;
 import bookeable.com.bookStore.models.Book;
 import bookeable.com.bookStore.services.BookService;
 import jakarta.persistence.EntityNotFoundException;
@@ -47,14 +48,24 @@ public class BookController {
     }
 
     @GetMapping("/price")
-    public ResponseEntity<List<BookResponseDTO>> booksByPrice(@RequestParam("price") float price){
+    public ResponseEntity<List<BookResponseDTO>> booksByPrice( @RequestParam("price") double price){
 
         List<BookResponseDTO> allBooksLessThanPrice = bookService.getBooksUpToPrice(price);
         return ResponseEntity.ok(allBooksLessThanPrice);
 
     }
 
+    // Get books by gender and price and author
 
+    @GetMapping("/filters")
+    public ResponseEntity<List<BookResponseDTO>> getBooksByFilters(@RequestParam("price") double price, @RequestParam("gender") BookGender gender,
+                                                                   @RequestParam("author") String author){
+git
+     List<BookResponseDTO> books = bookService.getBooksUpToPriceAuthorAndGender(price, gender,author);
+
+     return ResponseEntity.ok(books);
+
+    }
 
     @DeleteMapping("/delete/{id}")
     public  ResponseEntity<String> delete(@PathVariable Long id ){

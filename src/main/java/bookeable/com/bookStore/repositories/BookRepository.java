@@ -1,5 +1,6 @@
 package bookeable.com.bookStore.repositories;
 
+import bookeable.com.bookStore.enums.BookGender;
 import bookeable.com.bookStore.models.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,8 +14,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByTitleContainingIgnoreCase(String title);
 
-    List<Book> findByPriceLessThanEqual(float price);
+    List<Book> findByPriceLessThanEqual(double price);
 
-    
+    List<Book> findByPriceLessThanEqualAndAuthorContainingIgnoreCaseAndGender(double price, String author, BookGender gender);
+
 
 }
