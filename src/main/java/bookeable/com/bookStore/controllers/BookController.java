@@ -60,7 +60,6 @@ public class BookController {
     @GetMapping("/filters")
     public ResponseEntity<List<BookResponseDTO>> getBooksByFilters(@RequestParam("price") double price, @RequestParam("gender") BookGender gender,
                                                                    @RequestParam("author") String author){
-git
      List<BookResponseDTO> books = bookService.getBooksUpToPriceAuthorAndGender(price, gender,author);
 
      return ResponseEntity.ok(books);
