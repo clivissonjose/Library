@@ -1,9 +1,8 @@
 package bookeable.com.bookStore.models;
 
 import bookeable.com.bookStore.enums.BookGender;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
+
 
 @Entity
 public class Book {

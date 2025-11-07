@@ -46,6 +46,7 @@ public class BookService {
     public List<Book> findByAuthor(String authorName) {
 
         return  bookRepository.findByAuthorContainingIgnoreCase(authorName);
+        
     }
 
     public void delete(Long id){
@@ -74,6 +75,13 @@ public class BookService {
        return  books.stream().map(this::toDto).toList();
 
     }
+ 
+    public List<BookResponseDTO> getBooksByContainingName(String name){
+
+        List<Book> books = bookRepository.findByTitleContainingIgnoreCase(name);
+        return books.stream().map(this::toDto).toList();
+
+    }  
 
     private  Book returnEntity(BookRequestDTO dto){
         Book book = new Book();

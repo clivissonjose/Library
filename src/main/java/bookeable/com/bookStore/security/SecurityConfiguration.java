@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users/all").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,  "/users/{id}").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/books/delete/{id}").hasRole("ADMIN")
                         .anyRequest().authenticated()

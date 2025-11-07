@@ -57,6 +57,13 @@ public class UserService {
 
     }
 
+    public User findById(Long id){
+
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com ID: " + id));
+
+    }
+
     public void deleteUser(Long id){
 
         userRepository.deleteById(id);

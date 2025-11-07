@@ -42,6 +42,19 @@ public class UserController {
         return ResponseEntity.ok("Senha Atualizada!");
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id){
+       
+        User user =  userService.findById(id);
+
+         if(user != null){
+             return ResponseEntity.ok(user);
+         }
+
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id){
         userService.deleteUser(id);

@@ -6,7 +6,7 @@ import bookeable.com.bookStore.enums.BookGender;
 import bookeable.com.bookStore.models.Book;
 import bookeable.com.bookStore.services.BookService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +64,14 @@ public class BookController {
 
      return ResponseEntity.ok(books);
 
+    }
+
+    // get books by containing name
+    @GetMapping("/name")
+    public ResponseEntity<List<BookResponseDTO>> getBooksByName(@RequestParam("name") String name){
+        List<BookResponseDTO> books = bookService.getBooksByContainingName(name);
+
+        return ResponseEntity.ok(books);
     }
 
     @DeleteMapping("/delete/{id}")
